@@ -1,0 +1,9 @@
+Options +FollowSymLinks -MultiViews
+
+RewriteEngine On
+ErrorDocument 404 /404.html
+
+RewriteRule    ^/$ index.php?page=home [NC,L] # Get archive by topic
+RewriteRule    ^([A-Za-z0-9-]+)/?$ index.php?page=$1 [NC,L] # Get archive by topic
+RewriteRule    ^([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/?$ index.php?page=$1&val1=$2 [NC,L] # Get archive by topic
+RewriteRule    ^([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/?$ index.php?page=$1&val1=$2&val2=$3 [NC,L] # Get archive by topic
