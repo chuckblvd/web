@@ -5,6 +5,7 @@ define('DB_HOST','localhost');
 define('DB_USER','chuck');		
 define('DB_PASSWORD','201314328');		
 define('DB_NAME','web');
+define('WEBSITE_ALIAS','web');
 
 define('BRAND_NAME','web');
 define('BASE_URL','http://localhost/web/');

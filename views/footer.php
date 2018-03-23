@@ -1,0 +1,1 @@
+<?php include(PATH_INCLUDES.'include_js.php');?>

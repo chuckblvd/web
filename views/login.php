@@ -1,36 +1,64 @@
-<?php
+<div>
+	<form name=login method=POST id=formLogin>
+		Username: <input type=text name=username id=uname><br>
+		Password: <input type=password name=password id=pwd><br>
+		<input type=submit name=login value=Login id=submit>
+	</form>
 
-	if(isset($_REQUEST['login'])){
 
-		$uname = $_REQUEST['username'];
-		$pwd = $_REQUEST['password'];
+	<br><br>
+	<a href="<?php echo BASE_URL.'home/chuck';?>">home</a>
+</div>
 
-		if(!$login = $db->get_row("SELECT * FROM tbl_user WHERE username = '$uname' AND pwd = '$pwd' AND activated = 1")){
-			echo 'error';
-		}
-		else{
-			
-			$_SESSION['role'] = $login->role;
-			echo $_SESSION['role'];
-			
-		}
-	}
+<footer>
+	<?php include('footer.php');?>
 
-	if(isset($_REQUEST['logout'])){
+	<script>
 
-		session_unset(); 
-		session_destroy(); 
-		// echo $_SESSION['role'];
+		jQuery.validator.addMethod("noSpace", function(value, element) { 
+			return value.indexOf(" ") < 0 && value != ""; 
+		}, "No space please and don't leave it empty");
 
-	}
+		$('#submit').on('click',function(){
+			var uname = $.trim($('#uname').val());
+			var pwd = $.trim($('#pwd').val());
+			console.log(uname);
 
-	?>
-
-	<div>
-		<form name=login method=POST>
-			Username: <input type=text name=username><br>
-			Password: <input type=password name=password><br>
-			<input type=submit name=login value=Login>
-			<input type=submit name=logout value=Logout>
-		</form>
-	</div>
+			var validator = $('#formLogin').validate({
+				rules: {
+					username:{
+						required:true,
+						// email:true,
+						maxlength: 50,
+						noSpace: true
+					},
+					password:{
+						required:true,
+						maxlength:50
+					}
+				},
+				messages:{
+					username:{
+						required:"Please fill in this Username field."
+					},
+					password:{
+						required:"Please fill in this Password field."
+					}
+				},
+				submitHandler: function(form){
+					
+					$.post('lib/login_helper.php',{uname:uname,pwd:pwd},function(data){
+						
+						alert(uname);
+						// if(data=='success'){
+							// document.location='index.php?page=home';
+						// }
+						// form.submit();
+					});
+				}
+			});
+			validator.resetForm();
+			console.log(uname);
+		});
+	</script>
+</footer>

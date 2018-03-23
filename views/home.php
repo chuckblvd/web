@@ -1,9 +1,11 @@
 <?php
 
-if(isset($_GET['val1'])){
-	echo $_GET['val1'];
+if(isset($_SESSION[WEBSITE_ALIAS]['user']['id'])){
+	echo $_SESSION[WEBSITE_ALIAS]['user']['id'];
 }
 
 ?>
 
 <div>hi</div>
+
+<a href="<?php echo BASE_URL.'login';?>">login</a>
