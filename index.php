@@ -8,6 +8,10 @@ else{
 	$page = $_GET["page"];
 }
 
+if(isset($_SESSION[WEBSITE_ALIAS]['user']['id'])){
+	echo $_SESSION[WEBSITE_ALIAS]['user']['id'];
+}
+
 $metaVal = $db->get_row("SELECT * FROM tbl_pages WHERE slug = '$page' AND activated = 1");
 $meta_title = BRAND_NAME." - ".ucfirst($page)." - ".$metaVal->title;
 $meta_description = $metaVal->meta_description;
